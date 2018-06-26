@@ -1,0 +1,8 @@
+sklearn
+scipy
+pandas
+falcon
+gunicorn
+Flask
+azure.storage.blob
+numpy
