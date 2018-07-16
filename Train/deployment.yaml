@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: ds-containers-train
+spec:
+  template:
+    spec:
+      containers:
+      - name: ds-containers-train
+        image: ds-containers-train
+        command: ["python",  "train_model.py"]
+        env:
+        - name: ds_blob_account
+          valueFrom:
+            secretKeyRef:
+              name: ds-containers-blob
+              key: account
+        - name: ds_blob_key
+          valueFrom:
+            secretKeyRef:
+              name: ds-containers-blob
+              key: key     
+        - name: ds_container
+          valueFrom:
+            secretKeyRef:
+              name: ds-containers-blob
+              key: container     
+        - name: ds_model_filename
+          valueFrom:
+            secretKeyRef:
+              name: ds-containers-blob
+              key: filename     
+        restartPolicy: Never
