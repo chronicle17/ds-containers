@@ -5,10 +5,11 @@ metadata:
 spec:
   template:
     spec:
+      restartPolicy: Never
       containers:
       - name: ds-containers-train
-        image: ds-containers-train
-        command: ["python",  "train_model.py"]
+        image: kubesreg.azurecr.io/ds-containers-blob:v1
+        command: ["python", "train_model.py"]
         env:
         - name: ds_blob_account
           valueFrom:
@@ -29,5 +30,4 @@ spec:
           valueFrom:
             secretKeyRef:
               name: ds-containers-blob
-              key: filename     
-        restartPolicy: Never
+              key: filename
