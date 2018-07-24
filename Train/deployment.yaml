@@ -8,7 +8,7 @@ spec:
       restartPolicy: Never
       containers:
       - name: ds-containers-train
-        image: kubesreg.azurecr.io/ds-containers-blob:v8
+        image: kubesreg.azurecr.io/ds-containers-train:latest
         command: ["python", "train_model.py"]
         env:
         - name: ds_blob_account
