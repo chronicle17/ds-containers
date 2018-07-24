@@ -17,4 +17,4 @@ ENV ds_model_filename # name of model filename to save
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
 # Run app.py when the container launches
-CMD ["python", "train_model.py"]
+#CMD ["python", "train_model.py"]
