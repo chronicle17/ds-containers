@@ -49,11 +49,11 @@ class PredictsResource(object):
 
         # load model file from Azure
         
-        blob_account_name = os.environ.get('ds_blob_account') 
-        blob_account_key = os.environ.get('ds_blob_key')  # fill in your blob account key
-        mycontainer = os.environ.get('ds_container')     # fill in the container name 
+        blob_account_name = os.environ.get('ds_blob_account').strip() 
+        blob_account_key = os.environ.get('ds_blob_key').strip()  # fill in your blob account key
+        mycontainer = os.environ.get('ds_container').strip()     # fill in the container name 
 
-        filename = os.environ.get('ds_model_filename') 
+        filename = os.environ.get('ds_model_filename').strip() 
         dirname = os.getcwd()
         localfile = os.path.join(dirname, filename)
 

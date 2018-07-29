@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ds-containers-service
+  labels:
+    app: ds-containers-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+    name: http
+  - port: 443
+    protocol: TCP
+    name: https
+  selector:
+    app: ds-containers-serve
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ds-containers-serve
+  labels:
+    app: ds-containers-serve
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ds-containers-serve
+  template:
+    metadata:
+      labels:
+        app: ds-containers-serve
+    spec:
+      containers:
+      - name: ds-containers-serve
+        image: kubesreg.azurecr.io/ds-containers-serve:latest
+        env:
+        - name: ds_blob_account
+          valueFrom:
+            secretKeyRef:
+              name: ds-containers-blob
+              key: account
+        - name: ds_blob_key
+          valueFrom:
+            secretKeyRef:
+              name: ds-containers-blob
+              key: key     
+        - name: ds_container
+          valueFrom:
+            secretKeyRef:
+              name: ds-containers-blob
+              key: container     
+        - name: ds_model_filename
+          valueFrom:
+            secretKeyRef:
+              name: ds-containers-blob
+              key: filename
