@@ -13,7 +13,7 @@ class InfoResource(object):
     def on_get(self, req, resp):
         """Handles GET Requests"""
         resp.status = falcon.HTTP_200
-        resp.body = ('\nThis is an API for a deployed iris classification model.\n'
+        resp.body = ('\nThis is an API for to predict flight delays based on weather.\n'
                      'Version: 1.0\n\n'
                      'To learn more, send a GET request to the /predicts endpoint.')
 
@@ -23,13 +23,19 @@ class PredictsResource(object):
         """Handles GET Requests"""
         resp.status = falcon.HTTP_200
         resp.body = ('\nRequests and responses served in JSON.\n\n'
-                     'Input Schema: \n'
-                     '&nbsp;&nbsp;&nbsp;sepal_len:float\n' 
-                     '&nbsp;&nbsp;&nbsp;sepal_width:float\n'
-                     '&nbsp;&nbsp;&nbsp;petal_len:float\n' 
-                     '&nbsp;&nbsp;&nbsp;petal_width:float\n\n'
-                     'Output Schema: \n'
-                     '&nbsp;&nbsp;&nbsp;iris_type:int')
+                     '<b>Input Schema: <\b>\n'
+                     '   month:int\n' 
+                     '   day:int\n'
+                     '   dayofweek:int\n' 
+                     '   departure_hour:int\n'
+                     '   windspeed:float\n'
+                     '   pressure:float\n'
+                     '   precip:float\n'
+                     '   dep_airport:str\n'
+                     '   arr_airport:str\n'
+                     '   carrier:str\n'
+                     '<b>Output Schema: <\b>\n'
+                     '   delay:int')
 
     def on_post(self, req, resp):
         """Handles POST Requests"""
